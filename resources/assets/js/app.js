@@ -1,0 +1,32 @@
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+require('./bootstrap');
+
+window.Vue = require('vue');
+window.moment = require('moment');
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+Vue.filter('balance', function(value) {
+  return Number(value).toFixed(4);
+});
+
+Vue.filter('time', function(value) {
+  return moment(String(value)).format('HH:mm:ss');
+});
+
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('chat-component', require('./components/ChatComponent.vue'));
+
+const app = new Vue({
+    el: '#app'
+});

@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --innodb-buffer-pool-size=64M
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_DATABASE:-dice}
+      MARIADB_USER: ${DB_USERNAME:-dice}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      TZ: Europe/Warsaw
+    volumes:
+      - dice_db:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    image: ghcr.io/kelostrada/dice:${VERSION:-latest}
+    restart: unless-stopped
+    ports:
+      - "${PORT:-4005}:80"
+    volumes:
+      - ./app.env:/var/www/html/.env:ro
+      - dice_storage:/var/www/html/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  dice_db:
+    name: dice_db
+  dice_storage:
+    name: dice_storage
