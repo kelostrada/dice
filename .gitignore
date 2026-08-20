@@ -9,6 +9,7 @@
 /storage/framework/views/*
 !/storage/framework/views/.gitkeep
 /bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
 /app.env
 /db/
 .DS_Store

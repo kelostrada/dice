@@ -15,7 +15,7 @@ RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' \
 COPY --chown=www-data:www-data . /var/www/html/
 WORKDIR /var/www/html
 
-RUN cp -a storage /var/storage-skel
+RUN chown -R www-data:www-data bootstrap/cache && cp -a storage /var/storage-skel
 
 COPY docker/entrypoint.sh /usr/local/bin/dice-entrypoint
 RUN chmod +x /usr/local/bin/dice-entrypoint
