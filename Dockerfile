@@ -6,7 +6,7 @@ FROM php:7.2-apache
 ENV TZ=Europe/Warsaw
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql opcache && docker-php-ext-enable opcache
 
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' \
         /etc/apache2/sites-available/000-default.conf /etc/apache2/apache2.conf \

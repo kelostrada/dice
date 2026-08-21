@@ -84,7 +84,7 @@
                   <div class="col-sm-12 text-center">
                     <button @click="rolling = true" type="submit" class="btn btn-primary btn-lg btn-roll">
                       <span v-show="!rolling">ROLL DICE</span>
-                      <img v-show="rolling" src="https://primedice.com/2546195b5819417720ced0cfc17bd387.gif" />
+                      <img v-show="rolling" src="/img/rolling.svg" />
                     </button>
                     <input type="hidden" name="_token" :value="csrf_token">
                   </div>

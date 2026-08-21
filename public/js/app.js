@@ -43537,7 +43537,7 @@ var render = function() {
                   ],
                   attrs: {
                     src:
-                      "https://primedice.com/2546195b5819417720ced0cfc17bd387.gif"
+                      "/img/rolling.svg"
                   }
                 })
               ]
